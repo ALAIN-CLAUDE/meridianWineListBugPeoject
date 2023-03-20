@@ -1,0 +1,132 @@
+<template>
+   <div>
+     <lightning-datatable data={records} 
+                         columns={fieldColumns}
+                         key-field="Id"
+                         hide-checkbox-column="true"
+                         onrowaction={editRecord}>
+     </lightning-datatable>
+     <br>
+     <!-- <div class="slds-align_absolute-center">
+     <lightning-button icon-name="utility:save" label="Save" variant="brand" onclick={handleSave}></lightning-button>   
+     </div>-->
+   </div> 
+  
+   <template if:true={openActiveModal}>          
+    <div role="dialog" class="slds-modal slds-fade-in-open slds-backdrop">  
+      <div class="slds-modal__container">  
+        <div class="slds-modal__header">  
+          <lightning-button-icon icon-name="utility:close" alternative-text="Close this window" size="large"  
+            variant="bare-inverse" onclick={closeActiveModal} class="slds-modal__close">  
+          </lightning-button-icon>  
+          <h2>Update Active Status</h2>  
+        </div>   
+        <div class="slds-modal__content slds-p-around_medium modalContentBody">   
+            <lightning-combobox name="active"
+                                value={activeValue}
+                                options={activeOptions}
+                                onchange={handleActiveChange} >
+            </lightning-combobox>
+        </div>  
+        <div class="slds-modal__footer">
+          <lightning-button icon-name="utility:save" label="Update" variant="brand" onclick={updateActiveStatus}>  
+          </lightning-button>    
+        </div>  
+      </div>  
+    </div>  
+  </template>
+
+
+  <template if:true={openListingModal}>  
+    <div role="dialog" class="slds-modal slds-fade-in-open slds-backdrop">  
+      <div class="slds-modal__container">  
+        <div class="slds-modal__header">  
+          <lightning-button-icon icon-name="utility:close" alternative-text="Close this window" size="large"  
+            variant="bare-inverse" onclick={closeListingModal} class="slds-modal__close">  
+          </lightning-button-icon>  
+          <h2>Update Listing</h2>  
+        </div>   
+        <div class="slds-modal__content slds-p-around_medium modalContentBody">   
+            <lightning-combobox name="listing"
+                                value={listingValue}
+                                options={listingOptions}
+                                onchange={handleListingChange}>
+            </lightning-combobox>
+        </div>  
+        <div class="slds-modal__footer">
+          <lightning-button icon-name="utility:save" label="Update" variant="brand" onclick={updateListing}>  
+          </lightning-button>     
+        </div>  
+      </div>  
+    </div>  
+  </template>
+
+  <template if:true={openBottlePriceModal}>          
+    <div role="dialog" class="slds-modal slds-fade-in-open slds-backdrop">  
+      <div class="slds-modal__container">  
+        <div class="slds-modal__header">  
+          <lightning-button-icon icon-name="utility:close" alternative-text="Close this window" size="large"  
+            variant="bare-inverse" onclick={closeBottlePriceModal} class="slds-modal__close">  
+          </lightning-button-icon>  
+          <h2>Update Bottle Price</h2>  
+        </div>   
+        <div class="slds-modal__content slds-p-around_medium">   
+          <lightning-input value={bottlePrice} onchange={handleBottlePriceChange}></lightning-input>
+        </div>  
+        <div class="slds-modal__footer">
+          <lightning-button icon-name="utility:save" label="Update" variant="brand" onclick={updateBottlePrice}>  
+          </lightning-button>    
+        </div>  
+      </div>  
+    </div>  
+  </template>
+
+  <template if:true={openGlassPriceModal}>          
+    <div role="dialog" class="slds-modal slds-fade-in-open slds-backdrop">  
+      <div class="slds-modal__container">  
+        <div class="slds-modal__header">  
+          <lightning-button-icon icon-name="utility:close" alternative-text="Close this window" size="large"  
+            variant="bare-inverse" onclick={closeGlassPriceModal} class="slds-modal__close">  
+          </lightning-button-icon>  
+          <h2>Update Glass Price</h2>  
+        </div>   
+        <div class="slds-modal__content slds-p-around_medium">   
+          <lightning-input value={glassPrice} onchange={handleGlassPriceChange}></lightning-input>
+        </div>  
+        <div class="slds-modal__footer">
+          <lightning-button icon-name="utility:save" label="Update" variant="brand" onclick={updateGlassPrice}>  
+          </lightning-button>    
+        </div>  
+      </div>  
+    </div>  
+  </template>
+
+  <template if:true={openNewProductModal}>          
+    <div role="dialog" class="slds-modal slds-fade-in-open slds-backdrop">  
+      <div class="slds-modal__container">  
+        <div class="slds-modal__header">  
+          <lightning-button-icon icon-name="utility:close" alternative-text="Close this window" size="large"  
+            variant="bare-inverse" onclick={closeGlassPriceModal} class="slds-modal__close">  
+          </lightning-button-icon>  
+          <h2>New Product</h2>  
+        </div>   
+        <div class="slds-modal__content slds-p-around_medium"> 
+          
+          <lightning-combobox name="listing"
+                                value={listingValue}
+                                options={listingOptions}
+                                onchange={handleListingChange}>
+          </lightning-combobox>
+          <lightning-input value={bottlePrice} onchange={handleGlassPriceChange}></lightning-input>  
+          <lightning-input value={glassPrice} onchange={handleGlassPriceChange}></lightning-input>
+        </div>  
+        <div class="slds-modal__footer">
+         <lightning-button icon-name="utility:save" label="Update" variant="brand" onclick={addNewProduct}>  
+          </lightning-button>    
+        </div>  
+      </div>  
+    </div>  
+  </template>
+
+
+</template>

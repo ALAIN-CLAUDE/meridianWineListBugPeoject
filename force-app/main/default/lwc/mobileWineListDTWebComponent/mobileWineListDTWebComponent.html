@@ -1,0 +1,58 @@
+<template>
+    <div class="slds-grid slds-grid_vertical">
+        <lightning-layout multiple-rows="true" pull-to-boundary="small">
+            <template for:each={records} for:item="record" for:index="index">
+                <lightning-layout-item key={record.Id} size="12" small-device-size="9" class="slds-card_boundary slds-var-p-around_x-small">
+                    <lightning-card title={record.Product_Name__c}
+                                    key={record.Id} 
+                                    data-id={record.Id}
+                                    data-assortment={record.AssortmentId}
+                                    data-active={record.Active__c}
+                                    data-listing={record.Listing__c}  
+                                    data-bottle={record.Bottle_Price__c}
+                                    data-glass={record.Glass_Price__c}  
+                                    onclick={productSelected}>
+                        <p class="slds-p-horizontal_small" >Active:  {record.Active__c}</p>
+                        <p class="slds-p-horizontal_small" >Listing: {record.Listing__c}</p>
+                        <p class="slds-p-horizontal_small" >Bottle Price: {record.Bottle_Price__c}</p>
+                        <p class="slds-p-horizontal_small" >Glass Price: {record.Glass_Price__c}</p>
+                    </lightning-card>
+                </lightning-layout-item>
+            </template>
+        </lightning-layout>
+    </div>
+
+    <template if:true={openEditModal}>          
+        <div role="dialog" class="slds-modal slds-fade-in-open slds-backdrop">  
+          <div class="slds-modal__container">  
+            <div class="slds-modal__header">  
+              <lightning-button-icon icon-name="utility:close" alternative-text="Close this window" size="large"  
+                variant="bare-inverse" onclick={closeEditModal} class="slds-modal__close">  
+              </lightning-button-icon>  
+              <h2>Edit Product</h2>  
+            </div>   
+            <div class="slds-modal__content slds-p-around_medium modalContentBody"> 
+                <lightning-combobox name="active"
+                                    label="Active"
+                                    value={active}
+                                    options={activeOptions}
+                                    onchange={handleActiveChange}>
+                </lightning-combobox>
+                <lightning-combobox name="listing"
+                                    label="Listing"
+                                    value={listing}
+                                    options={listingOptions}
+                                    onchange={handleListingChange}>
+                </lightning-combobox>
+              <lightning-input label="Bottle Price" value={bottle} onchange={handleBottlePriceChange}></lightning-input>  
+              <lightning-input label="Glass Price" value={glass} onchange={handleGlassPriceChange}></lightning-input>
+            </div>  
+            <div class="slds-modal__footer">
+              <lightning-button icon-name="utility:save" label="Update" variant="brand" onclick={updateProduct}>  
+              </lightning-button>    
+            </div>  
+          </div>  
+        </div>  
+      </template>
+
+</template>
